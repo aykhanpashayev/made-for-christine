@@ -568,22 +568,21 @@ body::before {
 
 /* ── Image reveal panel ── */
 .mc-image-wrap {
-  height: 0;
+  max-height: 0;
   overflow: hidden;
-  /* Soft gradient shows as placeholder when image is missing */
   background: linear-gradient(135deg, var(--pink-soft) 0%, var(--lavender-lt) 100%);
-  transition: height .52s cubic-bezier(.4,0,.2,1);
+  transition: max-height .6s cubic-bezier(.4,0,.2,1);
 }
 
 .memory-card.revealed .mc-image-wrap {
-  height: 220px;
+  /* Large enough for any image aspect ratio */
+  max-height: 600px;
 }
 
 .mc-img {
   display: block;
   width: 100%;
-  height: 220px;
-  object-fit: cover;
+  height: auto;        /* natural proportional height — no cropping */
   /* No border-radius needed — parent clips with overflow:hidden */
 }
 
