@@ -81,6 +81,40 @@ function initLoadingScreen() {
 }
 
 /* ══════════════════════════════════════
+   AMBIENT HEARTS BACKGROUND
+══════════════════════════════════════ */
+function initAmbientHearts() {
+  const container = document.querySelector('.ambient-hearts');
+  if (!container) return;
+  container.innerHTML = '';
+
+  // Characters used in rotation
+  const chars = ['❤️', '💕', '💗', '💝', '💖', '🌸', '✨', '💞'];
+  const count = 18;
+
+  for (let i = 0; i < count; i++) {
+    const span = document.createElement('span');
+    span.className   = 'ambient-heart';
+    span.textContent = chars[i % chars.length];
+    span.setAttribute('aria-hidden', 'true');
+
+    // Spread positions evenly with slight variation
+    const leftPct  = 2 + ((i * 5.5 + (i % 3) * 3) % 94);
+    const fontSize = 0.5 + Math.random() * 0.7; // 0.5rem – 1.2rem
+    const duration = 10 + Math.random() * 14;    // 10s – 24s
+    // Negative delay = start animation already mid-flight (no empty gap at load)
+    const delay    = -(Math.random() * duration);
+
+    span.style.left              = `${leftPct}%`;
+    span.style.fontSize          = `${fontSize}rem`;
+    span.style.animationDuration = `${duration}s`;
+    span.style.animationDelay   = `${delay}s`;
+
+    container.appendChild(span);
+  }
+}
+
+/* ══════════════════════════════════════
    SCREEN 3 · MISSION CARDS
 ══════════════════════════════════════ */
 function revealMissionCard(card) {
@@ -101,6 +135,15 @@ function revealMissionCard(card) {
       if (btn)  { btn.style.display  = 'inline-flex'; btn.style.animation = 'fade-up .5s ease'; }
     }, 650);
   }
+}
+
+/* ══════════════════════════════════════
+   SCREEN 4 · FUTURE MEMORIES REVEAL
+══════════════════════════════════════ */
+function revealMemoryCard(card) {
+  // Cards stay open — tapping a revealed card does nothing
+  if (card.classList.contains('revealed')) return;
+  card.classList.add('revealed');
 }
 
 /* ══════════════════════════════════════
@@ -397,6 +440,9 @@ function resetAllState() {
   state.noClickCount    = 0;
   noOffset              = { x: 0, y: 0 };
 
+  // Memory cards (screen 4)
+  document.querySelectorAll('.memory-card').forEach(c => c.classList.remove('revealed'));
+
   // Mission cards
   document.querySelectorAll('.mission-card').forEach(c => c.classList.remove('flipped'));
   const prog = document.getElementById('cards-progress');
@@ -440,6 +486,7 @@ function startOver() {
    INIT
 ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+  initAmbientHearts();
   initLoadingScreen();
 
   document.getElementById('btn-to-welcome').addEventListener('click', () => {

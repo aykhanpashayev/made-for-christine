@@ -11,14 +11,8 @@
 </head>
 <body>
 
-  <!-- Ambient floating hearts (decorative) -->
-  <div class="ambient-hearts" aria-hidden="true">
-    <span class="ambient-heart">❤️</span>
-    <span class="ambient-heart">💕</span>
-    <span class="ambient-heart">✨</span>
-    <span class="ambient-heart">❤️</span>
-    <span class="ambient-heart">💗</span>
-  </div>
+  <!-- Ambient floating hearts — populated by initAmbientHearts() in script.js -->
+  <div class="ambient-hearts" aria-hidden="true"></div>
 
   <!-- Confetti canvas, activated on yes screen -->
   <canvas id="confetti-canvas" aria-hidden="true"></canvas>
@@ -153,41 +147,97 @@
       </div>
 
       <div class="memories-list">
-        <div class="memory-card mc-coffee">
-          <div class="mc-icon">☕</div>
-          <div class="mc-text">
-            <h3>Coffee date</h3>
-            <p>Just us, coffee, and good conversation</p>
+
+        <div class="memory-card mc-coffee" onclick="revealMemoryCard(this)">
+          <div class="mc-header">
+            <div class="mc-icon-wrap">☕</div>
+            <div class="mc-info">
+              <h3>Coffee date</h3>
+              <p>Just us, coffee, and good conversation</p>
+            </div>
+            <span class="mc-tap-hint" aria-hidden="true">tap ✦</span>
+          </div>
+          <div class="mc-image-wrap">
+            <img src="assets/images/coffee-date.png"
+                 alt="A cozy coffee date illustration"
+                 class="mc-img"
+                 loading="lazy"
+                 onerror="this.style.display='none'" />
           </div>
         </div>
-        <div class="memory-card mc-walk">
-          <div class="mc-icon">🌙</div>
-          <div class="mc-text">
-            <h3>Late night walk</h3>
-            <p>Fresh air and the city at night</p>
+
+        <div class="memory-card mc-walk" onclick="revealMemoryCard(this)">
+          <div class="mc-header">
+            <div class="mc-icon-wrap">🌙</div>
+            <div class="mc-info">
+              <h3>Late night walk</h3>
+              <p>Fresh air and the city at night</p>
+            </div>
+            <span class="mc-tap-hint" aria-hidden="true">tap ✦</span>
+          </div>
+          <div class="mc-image-wrap">
+            <img src="assets/images/late-night-walk.png"
+                 alt="A romantic late night walk illustration"
+                 class="mc-img"
+                 loading="lazy"
+                 onerror="this.style.display='none'" />
           </div>
         </div>
-        <div class="memory-card mc-movie">
-          <div class="mc-icon">🎬</div>
-          <div class="mc-text">
-            <h3>Movie night</h3>
-            <p>Snacks, comfort, and a good film</p>
+
+        <div class="memory-card mc-movie" onclick="revealMemoryCard(this)">
+          <div class="mc-header">
+            <div class="mc-icon-wrap">🎬</div>
+            <div class="mc-info">
+              <h3>Movie night</h3>
+              <p>Snacks, comfort, and a good film</p>
+            </div>
+            <span class="mc-tap-hint" aria-hidden="true">tap ✦</span>
+          </div>
+          <div class="mc-image-wrap">
+            <img src="assets/images/movie-night.png"
+                 alt="A cozy movie night illustration"
+                 class="mc-img"
+                 loading="lazy"
+                 onerror="this.style.display='none'" />
           </div>
         </div>
-        <div class="memory-card mc-date">
-          <div class="mc-icon">🌹</div>
-          <div class="mc-text">
-            <h3>First official date</h3>
-            <p>Something special, just for us</p>
+
+        <div class="memory-card mc-date" onclick="revealMemoryCard(this)">
+          <div class="mc-header">
+            <div class="mc-icon-wrap">🌹</div>
+            <div class="mc-info">
+              <h3>First official date</h3>
+              <p>Something special, just for us</p>
+            </div>
+            <span class="mc-tap-hint" aria-hidden="true">tap ✦</span>
+          </div>
+          <div class="mc-image-wrap">
+            <img src="assets/images/first-official-date.png"
+                 alt="A romantic first date illustration"
+                 class="mc-img"
+                 loading="lazy"
+                 onerror="this.style.display='none'" />
           </div>
         </div>
-        <div class="memory-card mc-future">
-          <div class="mc-icon">✨</div>
-          <div class="mc-text">
-            <h3>A future I'd like with you</h3>
-            <p>More moments, more memories, more us</p>
+
+        <div class="memory-card mc-future" onclick="revealMemoryCard(this)">
+          <div class="mc-header">
+            <div class="mc-icon-wrap">✨</div>
+            <div class="mc-info">
+              <h3>A future I'd like with you</h3>
+              <p>More moments, more memories, more us</p>
+            </div>
+            <span class="mc-tap-hint" aria-hidden="true">tap ✦</span>
+          </div>
+          <div class="mc-image-wrap">
+            <img src="assets/images/future-with-you.png"
+                 alt="A dreamy future together illustration"
+                 class="mc-img"
+                 loading="lazy"
+                 onerror="this.style.display='none'" />
           </div>
         </div>
+
       </div>
 
       <button class="btn btn-primary" onclick="showScreen('screen-hearts')">Continue ❤️</button>
