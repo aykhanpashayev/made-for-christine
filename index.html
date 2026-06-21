@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Made for Christine ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient floating hearts (decorative) -->
+  <div class="ambient-hearts" aria-hidden="true">
+    <span class="ambient-heart">❤️</span>
+    <span class="ambient-heart">💕</span>
+    <span class="ambient-heart">✨</span>
+    <span class="ambient-heart">❤️</span>
+    <span class="ambient-heart">💗</span>
+  </div>
+
+  <!-- Confetti canvas, activated on yes screen -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 1 · Loading
+  ═══════════════════════════════════ -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading-box">
+      <div class="loading-top">
+        <span class="loading-cursor" aria-hidden="true">▋</span>
+        <span class="loading-title-text">Loading Christine.exe...</span>
+      </div>
+      <div class="loading-lines" aria-live="polite">
+        <div class="loading-line" id="ll-1">Initializing smile detection...</div>
+        <div class="loading-line" id="ll-2">Searching for the girl who makes my days better...</div>
+        <div class="loading-line" id="ll-3">Match found: Christine ❤️</div>
+      </div>
+      <button class="btn btn-primary" id="btn-to-welcome" style="display:none;">Tap to continue</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 2 · Welcome
+  ═══════════════════════════════════ -->
+  <div id="screen-welcome" class="screen">
+    <div class="card welcome-card">
+      <div class="welcome-icon" aria-hidden="true">💌</div>
+      <h1 class="welcome-greeting">Hi Christine :)</h1>
+      <p class="welcome-text">
+        I made this little website because asking you this normally felt too simple.
+      </p>
+      <p class="welcome-text">
+        So I decided to do it my way.
+      </p>
+      <button class="btn btn-primary" onclick="showScreen('screen-missions')">Start the mission ✨</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 3 · Mission Cards
+  ═══════════════════════════════════ -->
+  <div id="screen-missions" class="screen scrollable-screen">
+    <div class="screen-inner">
+      <div class="screen-header">
+        <span class="mission-badge">Mission 1</span>
+        <h2 class="screen-title">Things I love about you</h2>
+        <p class="cards-progress" id="cards-progress">0 / 5 revealed</p>
+      </div>
+
+      <div class="mission-cards-grid">
+        <div class="mission-card" onclick="revealMissionCard(this)">
+          <div class="mission-card-inner">
+            <div class="mission-card-front">
+              <span class="card-emoji">😊</span>
+              <h3>Your smile</h3>
+              <span class="tap-hint">tap to reveal</span>
+            </div>
+            <div class="mission-card-back">
+              <p>It honestly makes my day better.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="revealMissionCard(this)">
+          <div class="mission-card-inner">
+            <div class="mission-card-front">
+              <span class="card-emoji">🤝</span>
+              <h3>Your support for me</h3>
+              <span class="tap-hint">tap to reveal</span>
+            </div>
+            <div class="mission-card-back">
+              <p>You make things feel more peaceful for me.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="revealMissionCard(this)">
+          <div class="mission-card-inner">
+            <div class="mission-card-front">
+              <span class="card-emoji">💬</span>
+              <h3>Your texts</h3>
+              <span class="tap-hint">tap to reveal</span>
+            </div>
+            <div class="mission-card-back">
+              <p>I catch myself waiting for your messages.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-card" onclick="revealMissionCard(this)">
+          <div class="mission-card-inner">
+            <div class="mission-card-front">
+              <span class="card-emoji">🌟</span>
+              <h3>Your personality</h3>
+              <span class="tap-hint">tap to reveal</span>
+            </div>
+            <div class="mission-card-back">
+              <p>You're sweet, interesting, and different in the best way.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission-card card-wide" onclick="revealMissionCard(this)">
+          <div class="mission-card-inner">
+            <div class="mission-card-front">
+              <span class="card-emoji">💫</span>
+              <h3>The way you make me feel</h3>
+              <span class="tap-hint">tap to reveal</span>
+            </div>
+            <div class="mission-card-back">
+              <p>I feel more relaxed and peaceful when I talk to you.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="missions-done" class="complete-notice" style="display:none;">
+        Mission 1 complete 🎉
+      </div>
+      <button class="btn btn-primary" id="btn-to-memories" style="display:none;" onclick="showScreen('screen-memories')">Continue ❤️</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 4 · Future Memories
+  ═══════════════════════════════════ -->
+  <div id="screen-memories" class="screen scrollable-screen">
+    <div class="screen-inner">
+      <div class="screen-header">
+        <h2 class="screen-title">Future memories I want to make with you</h2>
+      </div>
+
+      <div class="memories-list">
+        <div class="memory-card mc-coffee">
+          <div class="mc-icon">☕</div>
+          <div class="mc-text">
+            <h3>Coffee date</h3>
+            <p>Just us, coffee, and good conversation</p>
+          </div>
+        </div>
+        <div class="memory-card mc-walk">
+          <div class="mc-icon">🌙</div>
+          <div class="mc-text">
+            <h3>Late night walk</h3>
+            <p>Fresh air and the city at night</p>
+          </div>
+        </div>
+        <div class="memory-card mc-movie">
+          <div class="mc-icon">🎬</div>
+          <div class="mc-text">
+            <h3>Movie night</h3>
+            <p>Snacks, comfort, and a good film</p>
+          </div>
+        </div>
+        <div class="memory-card mc-date">
+          <div class="mc-icon">🌹</div>
+          <div class="mc-text">
+            <h3>First official date</h3>
+            <p>Something special, just for us</p>
+          </div>
+        </div>
+        <div class="memory-card mc-future">
+          <div class="mc-icon">✨</div>
+          <div class="mc-text">
+            <h3>A future I'd like with you</h3>
+            <p>More moments, more memories, more us</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="showScreen('screen-hearts')">Continue ❤️</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 5 · Hearts Mini Game
+  ═══════════════════════════════════ -->
+  <div id="screen-hearts" class="screen">
+    <div class="hearts-screen-wrap">
+      <div class="screen-header">
+        <span class="mission-badge">Mission 2</span>
+        <h2 class="screen-title">Collect 5 hearts</h2>
+        <p class="screen-subtitle">Tap each heart to unlock something important.</p>
+      </div>
+
+      <div class="hearts-counter">
+        <span id="hearts-count">0</span><span class="hc-slash">/5</span> hearts collected
+      </div>
+
+      <div class="hearts-area" id="hearts-area">
+        <button class="floating-heart fh-1" onclick="collectHeart(this)" aria-label="Collect heart">
+          <span class="fh-emoji">❤️</span>
+          <span class="fh-msg" hidden>You make me smile.</span>
+        </button>
+        <button class="floating-heart fh-2" onclick="collectHeart(this)" aria-label="Collect heart">
+          <span class="fh-emoji">💕</span>
+          <span class="fh-msg" hidden>You make things feel peaceful.</span>
+        </button>
+        <button class="floating-heart fh-3" onclick="collectHeart(this)" aria-label="Collect heart">
+          <span class="fh-emoji">💗</span>
+          <span class="fh-msg" hidden>I like talking to you more than I expected.</span>
+        </button>
+        <button class="floating-heart fh-4" onclick="collectHeart(this)" aria-label="Collect heart">
+          <span class="fh-emoji">❤️</span>
+          <span class="fh-msg" hidden>You became special to me.</span>
+        </button>
+        <button class="floating-heart fh-5" onclick="collectHeart(this)" aria-label="Collect heart">
+          <span class="fh-emoji">💝</span>
+          <span class="fh-msg" hidden>Okay… now I have one important question.</span>
+        </button>
+      </div>
+
+      <div id="heart-reveal-msg" class="heart-reveal-msg" style="display:none;" aria-live="polite"></div>
+
+      <div id="hearts-complete" style="display:none;">
+        <div class="unlock-badge">Question unlocked 🔓</div>
+        <button class="btn btn-primary" onclick="showScreen('screen-question')">Continue ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 6 · Big Question
+  ═══════════════════════════════════ -->
+  <div id="screen-question" class="screen">
+    <div class="card question-card">
+      <p class="q-name">Christine,</p>
+      <p class="q-note">I know I already call you wifey…</p>
+      <p class="q-main">but on paper, can you officially be my girlfriend? ❤️</p>
+
+      <div id="no-msg" class="no-msg" style="display:none;" aria-live="polite"></div>
+
+      <div class="q-buttons" id="q-buttons">
+        <button class="btn btn-yes" onclick="handleYes()">Yes ❤️</button>
+        <button class="btn btn-no" id="btn-no" onclick="handleNo()">No 🤨</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 7 · Yes Celebration
+  ═══════════════════════════════════ -->
+  <div id="screen-yes" class="screen scrollable-screen">
+    <div class="screen-inner">
+      <div class="card yes-card">
+        <div class="yes-emoji" aria-hidden="true">🥳</div>
+        <h2 class="yes-title">You just made me the happiest guy today ❤️</h2>
+        <div class="yes-promise">
+          <p>I promise I'll take care of you very well,</p>
+          <p>treat you sweet,</p>
+          <p>spoil you,</p>
+          <p>and make you feel loved.</p>
+          <br />
+          <p>And yes...</p>
+          <p>I'll marry you as soon as we can 😌❤️</p>
+        </div>
+        <button class="btn btn-primary" onclick="showScreen('screen-scheduler')">Plan our first official date 📅</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 8 · Date Scheduler
+  ═══════════════════════════════════ -->
+  <div id="screen-scheduler" class="screen scrollable-screen">
+    <div class="screen-inner">
+      <div class="screen-header">
+        <h2 class="screen-title">Pick our first official date time ❤️</h2>
+      </div>
+
+      <div class="scheduler-card">
+        <div class="form-group">
+          <label class="form-label" for="date-picker">📅 Choose a date</label>
+          <input type="date" id="date-picker" class="form-input date-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="start-time">🕘 Start time</label>
+          <select id="start-time" class="form-input select-input" onchange="updateEndTimes()">
+            <option value="">Select start time...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="end-time">🕓 End time</label>
+          <select id="end-time" class="form-input select-input">
+            <option value="">Select end time...</option>
+          </select>
+        </div>
+        <div id="scheduler-error" class="error-msg" style="display:none;" role="alert"></div>
+        <button class="btn btn-primary" onclick="lockInDate()">Lock it in ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 9 · Final Result
+  ═══════════════════════════════════ -->
+  <div id="screen-final" class="screen scrollable-screen">
+    <div class="screen-inner">
+      <div class="final-card">
+        <div class="final-hearts" aria-hidden="true">❤️ ❤️ ❤️</div>
+        <h2 class="final-title">Perfect ❤️</h2>
+
+        <div class="final-date-block">
+          <p class="final-label">Our first official date:</p>
+          <p class="final-date-value" id="final-date-value"></p>
+          <p class="final-time-value" id="final-time-value"></p>
+        </div>
+
+        <p class="final-hint">Screenshot this and send it to me 😌</p>
+        <p class="final-closing">See you soon, girlfriend ❤️</p>
+
+        <button class="btn btn-secondary" onclick="startOver()">Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
